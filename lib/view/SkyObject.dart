@@ -3,6 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:myanimerev/model/PlanetData.dart';
 import 'package:myanimerev/view/SkyObjectDetail.dart';
 import 'package:myanimerev/view/SpaceTime.dart';
+import 'package:myanimerev/view_model/Colorss.dart';
 class SkyObjectPage extends StatefulWidget {
   @override
   _SkyObjectPageState createState() => _SkyObjectPageState();
@@ -23,7 +24,7 @@ class _SkyObjectPageState extends State<SkyObjectPage> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [Color(0xff3333ff),Color(0xffe0b3ff), Color(0xff8a00e6) ],
+                      colors: [FirstGradColor,MiddleGradColor, LastGradColor ],
                       begin : FractionalOffset.topRight,
                       end : FractionalOffset.bottomLeft
                   )
@@ -35,7 +36,7 @@ class _SkyObjectPageState extends State<SkyObjectPage> {
                 gradient: LinearGradient(
                     begin: FractionalOffset.topRight,
                     end: FractionalOffset.bottomLeft,
-                    colors: [Color(0xff4d0099),Color(0xff66b3ff),Color(0xffcce6ff),Color(0xff66b3ff),Color(0xff004d99)]
+                    colors: [BodyFirstGradColor,BodyMiddleGradColor,BodyMiddleGradColor1,BodyMiddleGradColor2,BodyLastGradColor]
                 )
             ),
             child: SafeArea(

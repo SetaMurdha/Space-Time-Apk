@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myanimerev/model/PlanetData.dart';
 import 'package:myanimerev/view/SkyObject.dart';
+import 'package:myanimerev/view_model/Colorss.dart';
 
 class SkyObjectDetail extends StatelessWidget {
   final SkyObjectInfo skyObjectInfo;
@@ -18,7 +19,7 @@ class SkyObjectDetail extends StatelessWidget {
               gradient: LinearGradient(
                   begin: FractionalOffset.topRight,
                   end: FractionalOffset.bottomLeft,
-                  colors: [Color(0xff4d0099),Color(0xff66b3ff),Color(0xffcce6ff),Color(0xff66b3ff),Color(0xff004d99)]
+                  colors: [BodyFirstGradColor,BodyMiddleGradColor,BodyMiddleGradColor1,BodyMiddleGradColor2,BodyLastGradColor]
               )
           ),
           child: Column(

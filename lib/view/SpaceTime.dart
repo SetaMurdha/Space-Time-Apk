@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:myanimerev/model/PlanetData.dart';
+import 'package:myanimerev/view/SkyObject.dart';
+import 'package:myanimerev/view_model/Colorss.dart';
 
 void main() {
   runApp(SpaceTimePage());
@@ -28,7 +30,7 @@ class _MyAppState extends State<SpaceTimePage> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [Color(0xff3333ff),Color(0xffe0b3ff), Color(0xff8a00e6) ],
+                      colors: [FirstGradColor,MiddleGradColor, LastGradColor ],
                       begin : FractionalOffset.topRight,
                       end : FractionalOffset.bottomLeft
                   )
@@ -46,36 +48,59 @@ class _MyAppState extends State<SpaceTimePage> {
                 gradient: LinearGradient(
                     begin: FractionalOffset.topRight,
                     end: FractionalOffset.bottomLeft,
-                    colors: [Color(0xff80d4ff),Color(0xffbf80ff)]
+                    colors: [BodyFirstGradColor,BodyMiddleGradColor,BodyMiddleGradColor1,BodyMiddleGradColor2,BodyLastGradColor]
                 )
             ),
             child: TabBarView(
               children: <Widget>[
-                Center(child: Container(
-                ),),
-                Center(child: _buildListView(context)),
+                Center(child: Column()),
+                Center(child: Column(
+                  children: <Widget>[
+                    SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Text('Space Objects Galery',textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)
+                          ],
+                        ),
+                      ),
+                    ),
+                    SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Text('In astronomy, an astronomical object or celestial object is a naturally occurring physical entity, association, or structure that exists in the observable universe. In astronomy, the terms object and body are often used interchangeably. However, an astronomical body or celestial body is a single, tightly bound, contiguous entity, while an astronomical or celestial object is a complex, less cohesively bound structure, which may consist of multiple bodies or even other objects with substructures. ',textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                          ],
+                        ),
+                      ),
+                    ),
+                    RaisedButton(
+                      padding: EdgeInsets.all(10),
+                      child: Text("View Gallery", style: TextStyle(color: Colors.white, fontSize: 15),),
+                      color: Colors.cyanAccent,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)
+                      ),
+                      onPressed: (){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                          return SkyObjectPage();
+                        }));
+                      },
+                    ),
+                  ],
+                )),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  ListView _buildListView(BuildContext context){
-    return ListView.builder(
-      itemCount: 13,
-      itemBuilder: (_, index){
-        return ListTile(
-          title: Text("The List #$index"),
-          subtitle: Text("Uji1"),
-          leading: Icon(Icons.thumb_down),
-          trailing: Icon(Icons.arrow_back),
-          onTap: (){
-
-          },
-        );
-      },
     );
   }
 }
