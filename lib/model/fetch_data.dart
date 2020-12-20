@@ -4,30 +4,29 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class Results {
-  final String sunrise;
-  final String sunset;
-  final String solarNoon;
-  final String dayLength;
+  String sunrise;
+  String sunset;
+  String solarNoon;
+  String dayLength;
 
   Results({this.sunrise, this.dayLength, this.sunset, this.solarNoon});
 
-  factory Results.fromJson(Map<String, dynamic> json) {
+  factory Results.createResult(Map<String, dynamic> object) {
     return Results(
-      sunrise: json["sunrise"],
-      sunset: json["sunset"],
-      solarNoon: json["solar_noon"],
-      dayLength: json["day_length"],
+      sunrise: object["sunrise"],
+      sunset: object["sunset"],
+      solarNoon: object["solar_noon"],
+      dayLength: object["day_length"],
     );
   }
 
-  Future<List<Results>> fetchDataWaktu(http.Client client) async{
-    final response = await client.get("https://api.sunrise-sunset.org/json?lat=-7.776423&lng=113.203712&date=today");
-    return compute(parseDataWaktu, response.body);
+  static Future<Results> connectToAPI(String latitude, String Longitude) async{
+    String url = "https://api.sunrise-sunset.org/json?lat="+latitude+"&lng="+Longitude+"&date=today";
+    var apiResult = await http.get(url);
+    var jsonObject = json.decode(apiResult.body);
 
+    var userData = (jsonObject as Map<String, dynamic>)['results'];
 
-  }
-  List<Results>parseDataWaktu(String responseBody){
-    final parsed = jsonDecode(responseBody)['results'].cast<Map<String, dynamic>>();
-    return parsed.map<Results>((json) => Results.fromJson(json)).toList();
+    return Results.createResult(userData);
   }
 }

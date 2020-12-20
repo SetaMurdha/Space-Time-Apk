@@ -117,19 +117,6 @@ class _SkyObjectPageState extends State<SkyObjectPage> {
                       children: <Widget>[
                         RaisedButton(
                           padding: EdgeInsets.all(10),
-                          child: Text("HomePage", style: TextStyle(color: Colors.white, fontSize: 15),),
-                          color: Colors.cyanAccent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0)
-                          ),
-                          onPressed: (){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                              return SpaceTimePage();
-                            }));
-                          },
-                        ),
-                        RaisedButton(
-                          padding: EdgeInsets.all(10),
                           child: Text("Back", style: TextStyle(color: Colors.white, fontSize: 15),),
                           color: Colors.cyanAccent,
                           shape: RoundedRectangleBorder(

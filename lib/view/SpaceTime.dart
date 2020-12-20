@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:myanimerev/model/PlanetData.dart';
+import 'package:myanimerev/model/fetch_data.dart';
 import 'package:myanimerev/view/SkyObject.dart';
 import 'package:myanimerev/view_model/Colorss.dart';
 
@@ -16,6 +15,9 @@ class SpaceTimePage extends StatefulWidget {
 }
 
 class _MyAppState extends State<SpaceTimePage> {
+  Results user = null;
+  TextEditingController controller = TextEditingController(text: "-7.776423");
+  TextEditingController controller1 = TextEditingController(text: "113.203712");
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,7 +55,52 @@ class _MyAppState extends State<SpaceTimePage> {
             ),
             child: TabBarView(
               children: <Widget>[
-                Center(child: Column()),
+                Center(child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text('UTC Time',textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                    Text ("Places Latitude : "+controller.text+"\nPlaces Longitude : "+controller1.text+"",style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                    Text((user != null)?
+                    "Sunrise \t\t\t\t\t\t\t: "+user.sunrise + "\n"+
+                        "Sunset \t\t\t\t\t\t\t\t: "+user.sunset + "\n"+
+                        "Solar Noon\t\t: "+user.solarNoon + "\n"+
+                        "Day Length\t\t: "+user.dayLength +" hours":
+                    "No data",textAlign: TextAlign.left,
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                    Container(margin: EdgeInsets.all(20),
+                        child: TextField
+                          (
+                          controller: controller,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),),
+                            hintText: "Latitude"
+                          ),
+                        )),
+                    Container(margin: EdgeInsets.all(20),
+                        child: TextField(controller: controller1,decoration: InputDecoration(
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),),
+                            hintText: "Longitude"
+                        ),)),
+                    RaisedButton(
+                      padding: EdgeInsets.all(10),
+                      child: Text("Get Data", style: TextStyle(color: Colors.white, fontSize: 15),),
+                      color: Colors.cyanAccent,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)
+                      ),
+                      onPressed: (){
+                        Results.connectToAPI(controller.text,controller1.text).then((value) {
+                          user = value;
+                          setState(() {
+
+                          });
+                        });
+
+                      },
+                    )
+                  ],
+                ),),
                 Center(child: Column(
                   children: <Widget>[
                     SafeArea(
